@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>SpringMVC0100Basics</display-name>
+  
+  <welcome-file-list>
+       <welcome-file>getHomePage.do</welcome-file>
+  </welcome-file-list>
+  
+  <context-param>											<!-- Global variable and accessed anywhere in project -->
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/EmpManagement.xml</param-value>	<!-- Change Here -->
+  </context-param>
+	
+	
+	
+<!-- 	Will make Application Context Ready from file mentioned in context-param location-->
+  <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+    
+<!--     Order of Creation
+    1-Listener
+    2-Filter
+    3-Servlet -->
+    
+    <!-- Creates Web Application Context as a child of Application Context -->
+  <servlet>
+    <servlet-name>dispatcher</servlet-name>						<!-- Should be given necessarily -->
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>												<!-- Local variable and accessed locally-->
+    	<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/config/EmpSpringMVC.xml</param-value>	<!-- Change Here -->
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
